@@ -9,6 +9,12 @@ Assign a shelf to each book. Search for books, change their state, then go back 
 Extra: each option (shelf) will tell you know many books there are currently at that place.
 Extra: animations added to some elements (page headers and book components)
 
+```
+Added PureComponent
+Added async + await
+Update Loading
+```
+
 ## Backend Server
 
 To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:

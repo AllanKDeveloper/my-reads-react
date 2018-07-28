@@ -1,16 +1,12 @@
-import React, {Component} from 'react'
+import React, {PureComponent} from 'react'
 import BookShelfChanger from './BookShelfChanger'
 import * as Animated from "animated/lib/targets/react-dom";
 import AnimatedWrapper from './../utils/AnimatedWrapper';
 import {Link} from 'react-router-dom'
 
-class Book extends Component {
-
-	constructor(props) {
-		super(props);
-		this.state = {
-			animate: new Animated.Value(0)
-		};
+class Book  extends PureComponent {
+	state = {
+		animation: new Animated.Value(0),
 	}
 
 	render() {

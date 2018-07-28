@@ -36,29 +36,19 @@ class BooksApp extends React.Component {
 		})
 	}
 
-	componentDidMount() {
-		this.updateBooks()
+	async componentDidMount() {
+		const books = await BooksAPI.getAll()
+		this.setState({ books })
 	}
 
-	changeSelectedBookshelf = (bookChanged) => {
-		this.showLoading()
-		BooksAPI.update(bookChanged.book, bookChanged.shelf).then(() => {
-			let myBookIds = this.state.books.map( (book) => (book.id) )
-			if (myBookIds.includes(bookChanged.book.id)) {
-				let books = this.state.books.map(bookStored => {
-					if (bookChanged.book.id === bookStored.id) {
-						bookStored.shelf = bookChanged.shelf
-					}
-					return bookStored
-				})
-				this.setState({books});
-			} else {
-				let newBook = bookChanged.book
-				newBook.shelf = bookChanged.shelf
-				this.setState({books: this.state.books.concat(newBook)});
-			}
-			this.hideLoading()
-		})
+	changeSelectedBookshelf = bookChanged => {
+		const { book, shelf } = bookChanged;
+		BooksAPI.update(book, shelf);
+		book.shelf = shelf;    
+
+		this.setState(state => ({
+			books: state.books.filter(b => b.id !== book.id).concat(book),
+		})); 
 	}
 
 	render() {
